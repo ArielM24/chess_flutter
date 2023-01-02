@@ -18,29 +18,32 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MainMenuBloc, MainMenuState>(
       builder: (context, state) {
+        Widget body = const Center(
+            child: GFLoader(
+          type: GFLoaderType.circle,
+        ));
+        Widget? themeButton;
+        Color? backgroundColor;
         if (state.status == MainMenuStatus.loadError) {
-          return Scaffold(body: Center(child: Text(state.errorMessage)));
+          body = Center(child: Text(state.errorMessage));
         }
         if (state.status == MainMenuStatus.loadSuccess) {
-          return Scaffold(
-            backgroundColor: state.isDarkTheme
-                ? AppColors.darkBackground
-                : AppColors.lightBackground,
-            body: Column(children: const [
-              MainMenuTitle(),
-              SinglePlayerButton(),
-              MultiPlayerButton(),
-              ReplayButton(),
-              ForgeButton()
-            ]),
-            floatingActionButton: const ThemeButton(),
-          );
+          backgroundColor = state.isDarkTheme
+              ? AppColors.darkBackground
+              : AppColors.lightBackground;
+          body = Column(children: const [
+            MainMenuTitle(),
+            SinglePlayerButton(),
+            MultiPlayerButton(),
+            ReplayButton(),
+            ForgeButton()
+          ]);
+          themeButton = const ThemeButton();
         }
-        return const Scaffold(
-          body: Center(
-              child: GFLoader(
-            type: GFLoaderType.circle,
-          )),
+        return Scaffold(
+          body: body,
+          backgroundColor: backgroundColor,
+          floatingActionButton: themeButton,
         );
       },
     );

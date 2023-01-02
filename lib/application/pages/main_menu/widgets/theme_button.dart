@@ -8,24 +8,28 @@ class ThemeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: 50,
-      child: BlocBuilder<MainMenuBloc, MainMenuState>(
-        builder: (context, state) {
-          IconData icon = state.isDarkTheme ? Icons.sunny : Icons.nightlight;
-          Color color = state.isDarkTheme ? Colors.amber : Colors.purple[900]!;
-          Color splashColor = state.isDarkTheme
-              ? AppColors.amberSplash
-              : AppColors.violetSplash;
-          return MaterialButton(
-            color: color,
-            padding: const EdgeInsets.all(0),
-            splashColor: splashColor,
-            onPressed: () => _changeTheme(context),
-            child: Icon(icon, color: Colors.white, size: 40),
-          );
-        },
+    return Tooltip(
+      message: "Change theme",
+      child: SizedBox(
+        height: 50,
+        width: 50,
+        child: BlocBuilder<MainMenuBloc, MainMenuState>(
+          builder: (context, state) {
+            IconData icon = state.isDarkTheme ? Icons.sunny : Icons.nightlight;
+            Color color =
+                state.isDarkTheme ? Colors.amber : Colors.purple[900]!;
+            Color splashColor = state.isDarkTheme
+                ? AppColors.amberSplash
+                : AppColors.violetSplash;
+            return MaterialButton(
+              color: color,
+              padding: const EdgeInsets.all(0),
+              splashColor: splashColor,
+              onPressed: () => _changeTheme(context),
+              child: Icon(icon, color: Colors.white, size: 40),
+            );
+          },
+        ),
       ),
     );
   }
