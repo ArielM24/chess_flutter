@@ -8,9 +8,10 @@ class MainMenuTitle extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.all(16.0),
       child: Center(
-          child: Text("Super Chess",
+          child: Text("Chess Forge",
               style: TextStyle(
                 fontSize: 24,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ))),
     );
