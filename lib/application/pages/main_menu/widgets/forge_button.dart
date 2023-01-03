@@ -1,6 +1,8 @@
+import 'package:chess_flutter/application/pages/forge_page/forge_page.dart';
 import 'package:chess_flutter/application/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgeButton extends StatelessWidget {
   const ForgeButton({Key? key}) : super(key: key);
@@ -20,7 +22,9 @@ class ForgeButton extends StatelessWidget {
           type: GFButtonType.solid,
           shape: GFButtonShape.square,
           size: GFSize.LARGE,
-          onPressed: () {}),
+          onPressed: () {
+            context.go(ForgePage.path);
+          }),
     );
   }
 }

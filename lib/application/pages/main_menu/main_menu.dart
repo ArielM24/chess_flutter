@@ -11,8 +11,9 @@ import 'package:getwidget/getwidget.dart';
 import 'bloc/main_menu_bloc.dart';
 import 'widgets/sigle_player_button.dart';
 
-class MainMenu extends StatelessWidget {
-  const MainMenu({Key? key}) : super(key: key);
+class MainMenuPage extends StatelessWidget {
+  static const String path = "/";
+  const MainMenuPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

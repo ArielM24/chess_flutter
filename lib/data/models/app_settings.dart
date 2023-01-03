@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 
 part 'app_settings.g.dart';

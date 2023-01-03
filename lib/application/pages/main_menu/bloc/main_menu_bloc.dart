@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chess_flutter/domain/repositories/settings_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
