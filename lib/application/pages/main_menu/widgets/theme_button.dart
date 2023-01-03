@@ -15,10 +15,10 @@ class ThemeButton extends StatelessWidget {
         width: 50,
         child: BlocBuilder<MainMenuBloc, MainMenuState>(
           builder: (context, state) {
-            IconData icon = state.isDarkTheme ? Icons.sunny : Icons.nightlight;
+            IconData icon = state.useDarkTheme ? Icons.sunny : Icons.nightlight;
             Color color =
-                state.isDarkTheme ? Colors.amber : Colors.purple[900]!;
-            Color splashColor = state.isDarkTheme
+                state.useDarkTheme ? Colors.amber : Colors.purple[900]!;
+            Color splashColor = state.useDarkTheme
                 ? AppColors.amberSplash
                 : AppColors.violetSplash;
             return MaterialButton(

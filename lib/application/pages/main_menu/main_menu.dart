@@ -28,7 +28,7 @@ class MainMenu extends StatelessWidget {
           body = Center(child: Text(state.errorMessage));
         }
         if (state.status == MainMenuStatus.loadSuccess) {
-          backgroundColor = state.isDarkTheme
+          backgroundColor = state.useDarkTheme
               ? AppColors.darkBackground
               : AppColors.lightBackground;
           body = Column(children: const [

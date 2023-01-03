@@ -1,7 +1,6 @@
-import 'package:chess_flutter/data/providers/theme_provider.dart';
 import 'package:chess_flutter/domain/bloc_observer.dart';
 import 'package:chess_flutter/application/pages/main_menu/main_menu.dart';
-import 'package:chess_flutter/domain/repositories/theme_repository.dart';
+import 'package:chess_flutter/domain/repositories/settings_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<MainMenuBloc>(
               create: (context) =>
-                  MainMenuBloc(themeRepository: ThemeRepository())
+                  MainMenuBloc(settingsRepository: SettingsRepository())
                     ..add(MainMenuStarted()))
         ],
         child: const MainMenu(),

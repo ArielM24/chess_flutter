@@ -5,27 +5,27 @@ enum MainMenuStatus { initial, loadSuccess, loadError, loading }
 @immutable
 class MainMenuState extends Equatable {
   final MainMenuStatus status;
-  final bool isDarkTheme;
+  final bool useDarkTheme;
   final bool error;
   final String errorMessage;
 
   const MainMenuState(
       {required this.status,
-      this.isDarkTheme = false,
+      this.useDarkTheme = false,
       this.error = false,
       this.errorMessage = ""});
   @override
-  List<Object> get props => [status, isDarkTheme, error, errorMessage];
+  List<Object> get props => [status, useDarkTheme, error, errorMessage];
 
   MainMenuState copyWith({
     MainMenuStatus? status,
-    bool? isDarkTheme,
+    bool? useDarkTheme,
     bool? error,
     String? errorMessage,
   }) {
     return MainMenuState(
         status: status ?? this.status,
-        isDarkTheme: isDarkTheme ?? this.isDarkTheme,
+        useDarkTheme: useDarkTheme ?? this.useDarkTheme,
         error: error ?? this.error,
         errorMessage: errorMessage ?? this.errorMessage);
   }
