@@ -18,24 +18,9 @@ class MainMenuBloc extends Bloc<MainMenuEvent, MainMenuState> {
 
   _onMainMenuStarted(
       MainMenuStarted event, Emitter<MainMenuState> emitter) async {
-    try {
-      bool success = await settingsRepository.initRepository();
-      if (!success) {
-        emitter.call(state.copyWith(
-            status: MainMenuStatus.loadError,
-            error: true,
-            errorMessage: "Unnable to read database"));
-        return;
-      }
-      bool useDarkTheme = await settingsRepository.getUseDarkTheme;
-      emitter.call(state.copyWith(
-          status: MainMenuStatus.loadSuccess, useDarkTheme: useDarkTheme));
-    } catch (error) {
-      emitter.call(state.copyWith(
-          status: MainMenuStatus.loadError,
-          error: true,
-          errorMessage: "Unnable to read database"));
-    }
+    emitter.call(state.copyWith(
+        status: MainMenuStatus.loadSuccess,
+        useDarkTheme: await settingsRepository.getUseDarkTheme));
   }
 
   _onMainMenuThemeChanged(

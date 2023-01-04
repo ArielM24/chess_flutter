@@ -1,10 +1,10 @@
 import 'package:chess_flutter/application/router/app_router.dart';
 import 'package:chess_flutter/domain/bloc_observer.dart';
-import 'package:chess_flutter/application/pages/main_menu/main_menu.dart';
 import 'package:chess_flutter/domain/repositories/settings_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'application/pages/loading_app_page/bloc/loading_app_bloc.dart';
 import 'application/pages/main_menu/bloc/main_menu_bloc.dart';
 
 void main() async {
@@ -17,15 +17,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsRepository settingsRepository = SettingsRepository();
     return MultiBlocProvider(
       providers: [
         BlocProvider<MainMenuBloc>(
             create: (context) =>
-                MainMenuBloc(settingsRepository: SettingsRepository())
-                  ..add(MainMenuStarted()))
+                MainMenuBloc(settingsRepository: settingsRepository)
+                  ..add(MainMenuStarted())),
+        BlocProvider<LoadingAppBloc>(
+            create: (context) =>
+                LoadingAppBloc(settingsRepository: settingsRepository)
+                  ..add(LoadingAppStarted())),
       ],
       child: MaterialApp.router(
         title: 'Chess Forge',
+        debugShowCheckedModeBanner: false,
         routerConfig: AppRouter.router,
       ),
     );

@@ -11,7 +11,7 @@ class ReplayButton extends StatelessWidget {
       margin: const EdgeInsets.all(4),
       constraints: const BoxConstraints(minWidth: 350),
       child: GFButton(
-          color: AppColors.violetReplay,
+          color: AppColors.yellowReplay,
           text: "Replay",
           icon: const Icon(
             Icons.settings_backup_restore_rounded,
