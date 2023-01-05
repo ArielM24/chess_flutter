@@ -1,4 +1,6 @@
+import 'package:chess_flutter/application/pages/forge_page/bloc/forge_bloc.dart';
 import 'package:chess_flutter/application/router/app_router.dart';
+import 'package:chess_flutter/application/theme/app_colors.dart';
 import 'package:chess_flutter/domain/bloc_observer.dart';
 import 'package:chess_flutter/domain/repositories/settings_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,13 +28,19 @@ class MyApp extends StatelessWidget {
                   ..add(MainMenuStarted())),
         BlocProvider<LoadingAppBloc>(
             create: (context) =>
-                LoadingAppBloc(settingsRepository: settingsRepository)
-                  ..add(LoadingAppStarted())),
+                LoadingAppBloc(settingsRepository: settingsRepository)),
+        BlocProvider(
+            create: (context) =>
+                ForgeBloc(settingsRespository: settingsRepository)
+                  ..add(ForgeStarted()))
       ],
       child: MaterialApp.router(
         title: 'Chess Forge',
         debugShowCheckedModeBanner: false,
-        routerConfig: AppRouter.router,
+        routeInformationParser: AppRouter.router.routeInformationParser,
+        routerDelegate: AppRouter.router.routerDelegate,
+        routeInformationProvider: AppRouter.router.routeInformationProvider,
+        color: AppColors.darkBackground,
       ),
     );
   }

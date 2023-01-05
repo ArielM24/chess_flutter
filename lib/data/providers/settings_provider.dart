@@ -3,21 +3,17 @@ import 'package:isar/isar.dart';
 
 class SettingsProvider {
   Isar? _isar;
+  AppSettings? settings;
   Future<bool> init() async {
     try {
       _isar ??= await Isar.open([AppSettingsSchema]);
+      if (_isar?.isOpen ?? false) {
+        settings = await _isar?.appSettings.get(0);
+      }
       return _isar != null;
     } catch (error) {
       return false;
     }
-  }
-
-  Future<AppSettings?> readSettings() async {
-    AppSettings? settings;
-    if (_isar?.isOpen ?? false) {
-      settings = await _isar?.appSettings.get(0);
-    }
-    return settings;
   }
 
   Future<bool?> writeSettings(AppSettings settings) async {
@@ -25,9 +21,12 @@ class SettingsProvider {
       await _isar?.writeTxn(() async {
         await _isar?.appSettings.put(settings);
       });
+      this.settings = await _isar?.appSettings.get(0);
       return true;
     } catch (error) {
       return false;
     }
   }
+
+  bool get getUseDarkTheme => settings?.useDarkTheme ?? false;
 }

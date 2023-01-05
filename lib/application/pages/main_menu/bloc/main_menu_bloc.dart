@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:chess_flutter/domain/repositories/settings_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +9,9 @@ part 'main_menu_event.dart';
 class MainMenuBloc extends Bloc<MainMenuEvent, MainMenuState> {
   final SettingsRepository settingsRepository;
   MainMenuBloc({required this.settingsRepository})
-      : super(const MainMenuState(status: MainMenuStatus.initial)) {
+      : super(MainMenuState(
+            status: MainMenuStatus.initial,
+            useDarkTheme: settingsRepository.useDarkTheme)) {
     on<MainMenuStarted>(_onMainMenuStarted);
     on<MainMenuThemeChanged>(_onMainMenuThemeChanged);
   }
@@ -20,7 +20,7 @@ class MainMenuBloc extends Bloc<MainMenuEvent, MainMenuState> {
       MainMenuStarted event, Emitter<MainMenuState> emitter) async {
     emitter.call(state.copyWith(
         status: MainMenuStatus.loadSuccess,
-        useDarkTheme: await settingsRepository.getUseDarkTheme));
+        useDarkTheme: settingsRepository.useDarkTheme));
   }
 
   _onMainMenuThemeChanged(
@@ -34,7 +34,7 @@ class MainMenuBloc extends Bloc<MainMenuEvent, MainMenuState> {
             error: true,
             errorMessage: "Unnable to connect to database"));
       }
-      bool useDarkTheme = await settingsRepository.getUseDarkTheme;
+      bool useDarkTheme = settingsRepository.useDarkTheme;
       emitter.call(state.copyWith(
           status: MainMenuStatus.loadSuccess, useDarkTheme: useDarkTheme));
     } catch (error) {

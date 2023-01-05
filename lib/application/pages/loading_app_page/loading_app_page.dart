@@ -6,9 +6,22 @@ import 'package:go_router/go_router.dart';
 
 import 'bloc/loading_app_bloc.dart';
 
-class LoadingAppPage extends StatelessWidget {
+class LoadingAppPage extends StatefulWidget {
   static String path = "/";
   const LoadingAppPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoadingAppPage> createState() => _LoadingAppPageState();
+}
+
+class _LoadingAppPageState extends State<LoadingAppPage> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<LoadingAppBloc>().add(LoadingAppStarted());
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +29,7 @@ class LoadingAppPage extends StatelessWidget {
       body: BlocListener<LoadingAppBloc, LoadingAppState>(
         listener: (context, state) {
           if (state.status == LoadingAppStatus.complete) {
+            debugPrint("navigating to main menu");
             context.go(MainMenuPage.path);
           }
           state.loadingElement;

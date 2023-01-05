@@ -10,20 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/main_menu_bloc.dart';
 import 'widgets/sigle_player_button.dart';
 
-class MainMenuPage extends StatefulWidget {
+class MainMenuPage extends StatelessWidget {
   static const String path = "/main_menu";
   const MainMenuPage({Key? key}) : super(key: key);
 
   @override
-  State<MainMenuPage> createState() => _MainMenuPageState();
-}
-
-class _MainMenuPageState extends State<MainMenuPage> {
-  bool dark = false;
-  Color? backgroundColor;
-
-  @override
   Widget build(BuildContext context) {
+    Color? backgroundColor;
     return BlocBuilder<MainMenuBloc, MainMenuState>(
       builder: (context, state) {
         if (state.status == MainMenuStatus.loadSuccess) {

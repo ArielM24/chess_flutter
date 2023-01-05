@@ -9,15 +9,14 @@ class SettingsRepository {
     if (!success) {
       return false;
     }
-    AppSettings? settings = await appSettings;
-    if (settings == null) {
+    if (appSettings == null) {
       success = await setDefaultSettings();
     }
     return success;
   }
 
-  Future<AppSettings?> get appSettings async {
-    return await settingsProvider.readSettings();
+  AppSettings? get appSettings {
+    return settingsProvider.settings;
   }
 
   Future<bool> setDefaultSettings() async {
@@ -25,8 +24,8 @@ class SettingsRepository {
     return await settingsProvider.writeSettings(settings) ?? false;
   }
 
-  Future<bool> get getUseDarkTheme async {
-    AppSettings? settings = await appSettings;
+  bool get useDarkTheme {
+    AppSettings? settings = appSettings;
     if (settings != null) {
       return settings.useDarkTheme ?? false;
     }
@@ -34,11 +33,10 @@ class SettingsRepository {
   }
 
   Future<bool> switchUseDarkTheme() async {
-    AppSettings? settings = await appSettings;
-    if (settings != null) {
-      bool useDarkTheme = settings.useDarkTheme ?? false;
-      return await settingsProvider
-              .writeSettings(settings.copyWith(useDarkTheme: !useDarkTheme)) ??
+    if (appSettings != null) {
+      bool useDarkTheme = appSettings!.useDarkTheme ?? false;
+      return await settingsProvider.writeSettings(
+              appSettings!.copyWith(useDarkTheme: !useDarkTheme)) ??
           false;
     }
     return false;

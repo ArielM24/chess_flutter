@@ -1,6 +1,8 @@
-import 'package:chess_flutter/application/pages/main_menu/main_menu.dart';
+import 'package:chess_flutter/application/pages/forge_page/bloc/forge_bloc.dart';
+import 'package:chess_flutter/application/pages/forge_page/widgets/forge_side_bar.dart';
+import 'package:chess_flutter/application/theme/app_colors.dart';
 import "package:flutter/material.dart";
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgePage extends StatelessWidget {
   static const String path = "/forge";
@@ -8,12 +10,20 @@ class ForgePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          leading: BackButton(
-            onPressed: () => context.go(MainMenuPage.path),
+    return BlocBuilder<ForgeBloc, ForgeState>(
+      builder: (context, state) {
+        Color? backgroundColor = state.useDarkTheme
+            ? AppColors.darkBackground
+            : AppColors.lightBackground;
+        return Scaffold(
+          backgroundColor: backgroundColor,
+          body: Row(
+            children: const [
+              ForgeSideBar(),
+            ],
           ),
-          title: const Text("Forge")),
+        );
+      },
     );
   }
 }

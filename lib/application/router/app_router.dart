@@ -1,3 +1,4 @@
+import 'package:chess_flutter/application/pages/error/error_page.dart';
 import 'package:chess_flutter/application/pages/forge_page/forge_page.dart';
 import 'package:chess_flutter/application/pages/loading_app_page/loading_app_page.dart';
 import 'package:chess_flutter/application/pages/main_menu/main_menu.dart';
@@ -22,6 +23,12 @@ class AppRouter {
       path: LoadingAppPage.path,
       pageBuilder: (context, state) {
         return _customTransitionPage(state, const LoadingAppPage());
+      },
+    ),
+    GoRoute(
+      path: ErrorPage.path,
+      pageBuilder: (context, state) {
+        return _customTransitionPage(state, const ErrorPage());
       },
     ),
   ]);
