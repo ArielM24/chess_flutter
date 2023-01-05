@@ -1,6 +1,6 @@
 part of 'loading_app_bloc.dart';
 
-enum LoadingAppStatus { initial, loading, complete, failed }
+enum LoadingAppStatus { initial, loadingSettings, complete, failed }
 
 class LoadingAppState extends Equatable {
   final LoadingAppStatus status;

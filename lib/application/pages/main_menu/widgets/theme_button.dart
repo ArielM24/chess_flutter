@@ -1,4 +1,4 @@
-import 'package:chess_flutter/application/pages/main_menu/bloc/main_menu_bloc.dart';
+import 'package:chess_flutter/application/settings/bloc/settings_bloc.dart';
 import 'package:chess_flutter/application/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +13,7 @@ class ThemeButton extends StatelessWidget {
       child: SizedBox(
         height: 50,
         width: 50,
-        child: BlocBuilder<MainMenuBloc, MainMenuState>(
+        child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
             IconData icon = state.useDarkTheme ? Icons.sunny : Icons.nightlight;
             Color color = state.useDarkTheme
@@ -36,6 +36,6 @@ class ThemeButton extends StatelessWidget {
   }
 
   _changeTheme(BuildContext context) {
-    context.read<MainMenuBloc>().add(MainMenuThemeChanged());
+    context.read<SettingsBloc>().add(SettingsThemeChanged());
   }
 }

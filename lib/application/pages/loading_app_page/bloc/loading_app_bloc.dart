@@ -16,7 +16,7 @@ class LoadingAppBloc extends Bloc<LoadingAppEvent, LoadingAppState> {
       LoadingAppStarted event, Emitter<LoadingAppState> emitter) async {
     try {
       emitter.call(state.copyWith(
-        status: LoadingAppStatus.loading,
+        status: LoadingAppStatus.loadingSettings,
         loadingElement: "Database",
       ));
       bool success = await settingsRepository.initRepository();

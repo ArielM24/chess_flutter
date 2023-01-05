@@ -1,4 +1,6 @@
 import 'package:chess_flutter/application/pages/main_menu/main_menu.dart';
+import 'package:chess_flutter/application/settings/bloc/settings_bloc.dart';
+import 'package:chess_flutter/data/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
@@ -30,6 +32,7 @@ class _LoadingAppPageState extends State<LoadingAppPage> {
         listener: (context, state) {
           if (state.status == LoadingAppStatus.complete) {
             debugPrint("navigating to main menu");
+            context.read<SettingsBloc>().add(SettingsStarted());
             context.go(MainMenuPage.path);
           }
           state.loadingElement;

@@ -27,6 +27,4 @@ class SettingsProvider {
       return false;
     }
   }
-
-  bool get getUseDarkTheme => settings?.useDarkTheme ?? false;
 }

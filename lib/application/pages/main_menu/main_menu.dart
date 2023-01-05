@@ -3,6 +3,7 @@ import 'package:chess_flutter/application/pages/main_menu/widgets/forge_button.d
 import 'package:chess_flutter/application/pages/main_menu/widgets/main_menu_title.dart';
 import 'package:chess_flutter/application/pages/main_menu/widgets/multi_player_button.dart';
 import 'package:chess_flutter/application/pages/main_menu/widgets/replay_button.dart';
+import 'package:chess_flutter/application/settings/bloc/settings_bloc.dart';
 import 'package:chess_flutter/application/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,16 +18,16 @@ class MainMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color? backgroundColor;
-    return BlocBuilder<MainMenuBloc, MainMenuState>(
-      builder: (context, state) {
-        if (state.status == MainMenuStatus.loadSuccess) {
-          backgroundColor = state.useDarkTheme
-              ? AppColors.darkBackground
-              : AppColors.lightBackground;
-        }
-
-        return Scaffold(
-          body: AnimatedContainer(
+    return Scaffold(
+      body: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          if (state.status == SettingsStatus.themeChanged ||
+              state.status == SettingsStatus.success) {
+            backgroundColor = state.useDarkTheme
+                ? AppColors.darkBackground
+                : AppColors.lightBackground;
+          }
+          return AnimatedContainer(
             color: backgroundColor,
             duration: const Duration(milliseconds: 250),
             child: Column(children: const [
@@ -36,11 +37,11 @@ class MainMenuPage extends StatelessWidget {
               ReplayButton(),
               ForgeButton()
             ]),
-          ),
-          //backgroundColor: backgroundColor,
-          floatingActionButton: const ThemeButton(),
-        );
-      },
+          );
+        },
+      ),
+      //backgroundColor: backgroundColor,
+      floatingActionButton: const ThemeButton(),
     );
   }
 }
